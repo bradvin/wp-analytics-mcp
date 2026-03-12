@@ -146,7 +146,7 @@ Each teammate does this once. Takes ~5 minutes. No Google account setup required
       "command": "npx",
       "args": [
         "-y",
-        "mcp-remote@0.1.30",
+        "mcp-remote@latest",
         "https://yoursite.com/wp-json/mcp/v1/mcp",
         "--header",
         "Authorization: Bearer YOUR_API_KEY"

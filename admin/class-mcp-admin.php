@@ -81,7 +81,7 @@ class WP_MCP_Admin {
                             'command' => 'npx',
                             'args'    => [
                                 '-y',
-                                'mcp-remote@0.1.30',
+                                'mcp-remote@latest',
                                 $mcp_url,
                                 '--header',
                                 'Authorization: Bearer ' . $api_key,

@@ -3,14 +3,14 @@
  * Plugin Name: Analytics MCP Server
  * Plugin URI:  https://github.com/bradvin/wp-analytics-mcp
  * Description: Exposes a Model Context Protocol (MCP) endpoint for Google Search Console and Google Analytics 4, allowing Claude Desktop to query your analytics data.
- * Version:     1.0.1
+ * Version:     1.0.2
  * Author:      bradvin
  * License:     GPL-3.0+
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'WP_MCP_VERSION', '1.0.1' );
+define( 'WP_MCP_VERSION', '1.0.2' );
 define( 'WP_MCP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 require_once WP_MCP_PLUGIN_DIR . 'includes/class-mcp-auth.php';

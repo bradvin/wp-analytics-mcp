@@ -18,7 +18,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class WP_MCP_Server {
 
     private const NAMESPACE   = 'mcp/v1';
-    private const MCP_VERSION = '2025-11-25'; // Match Claude Desktop client version
+    private const MCP_VERSION = '2024-11-05'; // Baseline MCP version supported by all clients
+
+    /** Protocol versions this server can speak, newest first. */
+    private const SUPPORTED_VERSIONS = [
+        '2025-11-25',
+        '2025-06-18',
+        '2025-03-26',
+        '2024-11-05',
+    ];
 
     public static function init(): void {
         // Prevent WordPress from consuming the Authorization header before we can read it.
@@ -152,9 +160,15 @@ class WP_MCP_Server {
     // -------------------------------------------------------------------------
 
     private static function handle_initialize( array $params ): array {
-        // Accept whatever protocol version the client sends; respond with ours
+        // Negotiate protocol version: use the client's version if we support it,
+        // otherwise fall back to the baseline version both sides should understand.
+        $client_version   = $params['protocolVersion'] ?? self::MCP_VERSION;
+        $negotiated       = in_array( $client_version, self::SUPPORTED_VERSIONS, true )
+            ? $client_version
+            : self::MCP_VERSION;
+
         return [
-            'protocolVersion' => self::MCP_VERSION,
+            'protocolVersion' => $negotiated,
             'capabilities'    => [
                 'tools' => [ 'listChanged' => false ],
             ],
